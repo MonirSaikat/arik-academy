@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade');
             $table->string('name');
             $table->string('phone')->unique();
             $table->date('joining_date');
             $table->date('end_date')->nullable();
             $table->string('email');
-            $table->string('photo');
-            $table->string('file');
+            $table->string('photo')->nullable();
+            $table->string('file')->nullable();
             $table->string('salary');
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->string('address');

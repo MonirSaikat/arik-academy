@@ -41,6 +41,7 @@ return [
     'attendance' => 'Attendance',
     'manually-attendance' => 'Manually Attendance',
     'device-synchronic' => 'Synchronic Attendance',
+    'student-pending' => 'Pending Student',
 
     'homework' => 'Homework',
     'add-homework' => 'Add Homework',

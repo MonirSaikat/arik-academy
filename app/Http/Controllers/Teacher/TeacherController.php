@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Teacher\Teacher;
 use App\Http\Controllers\Controller;
+use App\Models\UserHasRole;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
@@ -43,8 +44,6 @@ class TeacherController extends Controller
         
         $request->validate([
             'name' => 'required',
-            'photo' => 'required|max:2048|mimes:jpeg,png,jpg',
-            'file' => 'required',
             'department_id' => 'required',
             'salary' => 'required',
             'phone' => 'required|unique:teachers',
@@ -71,14 +70,18 @@ class TeacherController extends Controller
             $data['branch_id'] = branchName();
         }
         
-        User::create([
+       $user =  User::create([
             'username' => $request->phone,
             'password' => Hash::make($request->phone),
             'branch_id' => $data['branch_id'],
+            'is_teacher' => 1,
         ]);
-
+        $data['user_id'] = $user->id;
         Teacher::create($data);
-
+        UserHasRole::create([
+            'user_id' => $user->id,
+            'role_id' => 2,
+        ]);
         // user create 
         
         return redirect()->route('backend.teacher.index')->with('success','Teacher Created Successfylly');
@@ -162,6 +165,10 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+
+        User::findOrFail($teacher->user_id)->delete();
+        $teacher->delete();
+        return redirect()->route('backend.teacher.index')->with('success','Teacher Deleted Successfully');
     }
 }

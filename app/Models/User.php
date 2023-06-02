@@ -25,6 +25,7 @@ class User extends Authenticatable
     'mobile_number',
     'password',
     'branch_id',
+    'is_teacher',
   ];
 
   /**

@@ -19,7 +19,7 @@ class Student
 
     $user = auth()->user();
     $isStudent = $user->is_student == 1;
-
+    
     if ($isStudent) {
       return $next($request);
     } else {

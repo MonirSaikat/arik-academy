@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Http\Controllers\Controller;
+use Response;
+use Exception;
+use App\Models\User;
+use App\Models\Religion;
+use Illuminate\Http\Request;
 use App\Imports\StudentImport;
-use App\Models\Academic\Classes;
 use App\Models\Academic\Group;
+use App\Models\Student\Student;
+use App\Models\Academic\Classes;
 use App\Models\Academic\Section;
 use App\Models\Academic\Session;
-use App\Models\Religion;
-use App\Models\Student\Student;
-use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use Response;
-use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -85,7 +86,7 @@ class StudentController extends Controller
       'post' => 'required',
       'upozila' => 'required',
       'district' => 'required',
-      'photo' => 'required|max:2048|mimes:jpeg,png,jpg',
+      'photo' => 'max:2048|mimes:jpeg,png,jpg',
     ]);
 
     DB::beginTransaction();
@@ -118,7 +119,7 @@ class StudentController extends Controller
       $student = new Student($data);
       // dd($student->toArray());
       $user = new User();
-      $user->username = $data['student_unique_id'];
+      $user->username = $data['phone'];
       $user->password = Hash::make('12345678');
       $user->branch_id = 1;
       $user->is_student = true;

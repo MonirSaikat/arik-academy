@@ -18,57 +18,58 @@ class PermissionSeeder extends Seeder
     {
         //
         $groups = [
-                        'session',
-                        'section',
-                        'group',
-                        'class',
-                        'room',
-                        'routine',
-                        'subject',
-                         'student',
-                         'studentreport',
-                         'accountreport',
-                         'feereport',
-                         'inventoryreport',
-                         'attendance',
-                         'homeworke',
-                         'examination',
-                         'setting',
-                         'fees',
-                         'cashbook',
-                         'bank',
-                         'income',
-                         'expense',
-                         'designation',
-                         'department',
-                         'payroll',
-                         'sms',
-                         'notice',
-                         'event',
-                         'email',
-                         'category',
-                         'purchase',
-                         'supplier',
-                         'sale',
-                         'book',
-                         'member',
-                         'user',
-                         'role',
-                         'permission',
-                         'backup',
-                         'template',
-                         'teacher'
-                    ];
-        $permissions = ['module','index','store','update','delete','advance'];
+            'academic',
+            'homework',
+            'teacher',
+            'session',
+            'section',
+            'group',
+            'class',
+            'room',
+            'routine',
+            'subject',
+            'student',
+            'accounting',
+            'inventory',
+            'hrm',
+            'communication',
+            'library',
+            'feereport',
+            'attendance',
+            'examination',
+            'setting',
+            'fees',
+            'cashbook',
+            'bank',
+            'income',
+            'expense',
+            'designation',
+            'department',
+            'payroll',
+            'sms',
+            'notice',
+            'event',
+            'email',
+            'category',
+            'purchase',
+            'supplier',
+            'sale',
+            'book',
+            'user',
+            'role',
+            'permission',
+            'backup',
+            'template',
+        ];
+        $permissions = ['module', 'index', 'store', 'update', 'delete', 'advance'];
 
 
-        for($i=0;$i<count($groups);$i++){
-            $g = PermissionGroup::create(['name'=>$groups[$i]]);
-            for($j=0;$j<count($permissions);$j++)
-            {
+        for ($i = 0; $i < count($groups); $i++) {
+            $g = PermissionGroup::create(['name' => $groups[$i]]);
+            for ($j = 0; $j < count($permissions); $j++) {
                 $p = new Permission();
                 $p->group_id = $g->id;
-                $p->name = $groups[$i].'-'.$permissions[$j];
+                $p->name = $groups[$i] . '-' . $permissions[$j];
                 $p->save();
             }
         }

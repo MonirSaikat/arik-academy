@@ -61,6 +61,7 @@ use App\Http\Controllers\StudentDashboardController;
 
 //fee
 use App\Http\Controllers\Teacher\TeacherController;
+use App\Http\Controllers\TeacherDashboardController;
 use App\Http\Controllers\Transcation\TranscationController;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +89,8 @@ Route::group(['as' => 'backend.', 'namespace' => 'Backend', 'prefix' => 'authori
   //filter
   Route::get('fee/class/group/{id}', [GroupController::class, 'group']);
   Route::get('fee/student/search/{id}', [StudentController::class, 'search_student']);
+  Route::get('profile/{id}', [DashboardController::class, 'profile'])->name('user.profile');
+  Route::post('profile/update/{id}', [DashboardController::class, 'profile_update'])->name('user.profile.update');
 
   Route::group(['as' => 'general.', 'prefix' => 'general'], function () {
     Route::get('/langauage/{lang}', [GeneralSettingController::class, 'language'])->name('language');

@@ -50,11 +50,11 @@
                           </a>
                         
                           <div class="dropdown-menu">
-                            @if (userHasPermission('class-update'))
+                            @if (userHasPermission('teacher-update'))
                             <a class="dropdown-item" href="javascript:void(0)" onclick="editbutton({{ $item->id }})"><i class="fas fa-edit mr-2"></i> Edit</a>
                             @endif
-                            @if (userHasPermission('class-delete'))
-                            <a class="dropdown-item text-danger" href="{{ route('backend.class.delete',$item->id) }}" onclick="return confirm('Are you sure to delete this data..??')"><i class="fas fa-trash mr-2"></i>Delete</a>
+                            @if (userHasPermission('teacher-delete'))
+                            <a class="dropdown-item text-danger" href="{{ route('backend.teacher.delete',$item->id) }}" onclick="return confirm('Are you sure to delete this data..??')"><i class="fas fa-trash mr-2"></i>Delete</a>
                             @endif
                           </div>
                         </div>
@@ -83,14 +83,19 @@
         <form action="{{ route('backend.teacher.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
+                @php
+                  $branch = App\Models\Branch::all();
+                @endphp
+                @if (count($branch) > 1)
                 <div class="col-md-6 mb-3">
                   <label for="branch_id">Branch</label>
                   <select name="branch_id" id="branch_id" class="form-control selectpicker" data-live-search="true" title="Select Branch Name">
-                    @foreach (App\Models\Branch::all() as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @foreach ($branch as $item)
+                    <option value="{{ $item->id }}" {{ count($branch) == 1 ? 'selected':'' }}>{{ $item->name }}</option>
                     @endforeach
                   </select>
                 </div>
+                @endif
                 <div class="col-md-6 mb-3">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" required>
@@ -125,7 +130,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="photo">Photo</label>
-                    <input type="file" name="photo" id="photo" class="form-control" required>
+                    <input type="file" name="photo" id="photo" class="form-control">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="file">Document</label>

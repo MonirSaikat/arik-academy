@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('is_active')->default(true);
             $table->integer('branch_id')->default(1); 
+            $table->boolean('is_teacher')->default(false); 
             $table->rememberToken();
             $table->timestamps();
         });
