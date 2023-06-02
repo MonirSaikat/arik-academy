@@ -1,0 +1,40 @@
+------- Module Problem List ----------
+1. Branch Problem
+
+2. Academit
+    --> Routine menu ( not worked )
+
+3. Subject
+    --> subject assign teacher
+
+4. Student
+    --> student import has some modify and changes
+    --> promote student
+    --> student report
+    --> student id card generate
+
+5. Attendance
+    --> Manullay
+    --> Syncronic
+
+6. Home Work
+    --> add home worke
+    --> homework Evalution
+
+7. Examination
+    --> Setting
+    --> Seat Plan
+    --> Admit card
+    --> blank marksheet
+    --> tabulation sheet worked but need some design changes
+    --> marksheet has error
+    --> merit list worked but need some design changes
+    -->view result
+        -> session - exam not filtering
+        -> result print page problem
+        -> print page static school name and addresses
+
+
+
+
+
