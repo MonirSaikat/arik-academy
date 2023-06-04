@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Academic;
 
 use Illuminate\Http\Request;
+use PhpParser\Builder\Class_;
+use App\Models\Academic\Classes;
 use App\Models\Academic\Routine;
+use App\Models\Academic\Section;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,12 +19,11 @@ class RoutineController extends Controller
      */
     public function index()
     {
-        if(userHasPermission('routine-index')){
-            $routine = Routine::all();
-            return view('components.academic.routine',compact('routine'));
-        }else{
+        if (!userHasPermission('routine-index')) {
             hasNotPermission();
         }
+        $class = Classes::all();
+        return view('components.academic.routine', compact('class'));
     }
 
     /**
@@ -42,16 +44,16 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-        if(userHasPermission('routine-store')){
+        if (userHasPermission('routine-store')) {
             $request->validate([
                 'name' => 'required'
             ]);
             $data = $request->all();
             $data['branch_id'] = Auth::user()->branch_id;
-            $data['code'] = rand(0,9999);
+            $data['code'] = rand(0, 9999);
             Routine::create($data);
-            return redirect()->route('backend.routine.index')->with('success','Routine Created Successfull');
-        }else{
+            return redirect()->route('backend.routine.index')->with('success', 'Routine Created Successfull');
+        } else {
             hasNotPermission();
         }
     }
@@ -88,15 +90,15 @@ class RoutineController extends Controller
      */
     public function update(Request $request)
     {
-        if(userHasPermission('routine-update')){
+        if (userHasPermission('routine-update')) {
             $request->validate([
                 'name' => 'required'
             ]);
             Routine::find($request->update_id)->update([
                 'name' => $request->name,
             ]);
-            return redirect()->route('backend.routine.index')->with('success','Routine Updated Successfull');
-        }else{
+            return redirect()->route('backend.routine.index')->with('success', 'Routine Updated Successfull');
+        } else {
             hasNotPermission();
         }
     }
@@ -109,12 +111,21 @@ class RoutineController extends Controller
      */
     public function destroy($id)
     {
-        if(userHasPermission('routine-delete')){
+        if (userHasPermission('routine-delete')) {
             Routine::find($id)->delete();
-            return redirect()->route('backend.routine.index')->with('success','Routine Deleted Successfull');
-            
-        }else{
+            return redirect()->route('backend.routine.index')->with('success', 'Routine Deleted Successfull');
+        } else {
             hasNotPermission();
         }
+    }
+
+    public function getSection($id)
+    {
+        $section = Classes::join('class_section_assigns','classes.id','class_section_assigns.class_id')
+            ->join('sections','sections.id','class_section_assigns.section_id')
+            ->where('classes.id',$id)
+            ->select('sections.*')
+            ->get();
+        return response()->json($section);
     }
 }

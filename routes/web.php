@@ -176,6 +176,8 @@ Route::group(['as' => 'backend.', 'namespace' => 'Backend', 'prefix' => 'authori
     Route::get('/edit/{id}', [RoutineController::class, 'edit'])->name('edit');
     Route::post('/update', [RoutineController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [RoutineController::class, 'destroy'])->name('delete');
+
+    Route::get('/getSection/{id}',[RoutineController::class,'getSection']);
   });
 
   // subject module
