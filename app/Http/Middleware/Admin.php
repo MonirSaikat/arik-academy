@@ -19,7 +19,7 @@ class Admin
     {
 
         $user = auth()->user();
-        $isAdmin = $user->id == 1 || $user->user_type == 1 || $user->is_teacher = 1;
+        $isAdmin = $user->id == 1 || $user->user_type == 1 || $user->is_teacher == 1;
         $isStudent = $user->is_student == 1;
         
         if($isAdmin) {

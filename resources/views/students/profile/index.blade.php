@@ -118,7 +118,7 @@
                                     <input id="old_password" name="old_password" type="password" class="form-control" placeholder="Enter your old password">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">New Password</label>
+                                    <label for="password">New Password <span class="text-danger">New Password must be at least 8 digit or character</span> </label>
                                     <input id="password" name="password" type="password" class="form-control" placeholder="Enter new password">
                                 </div>
                                 <div class="form-group">

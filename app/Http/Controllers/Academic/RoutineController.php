@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Academic;
 
 use Illuminate\Http\Request;
-use PhpParser\Builder\Class_;
 use App\Models\Academic\Classes;
 use App\Models\Academic\Routine;
 use App\Models\Academic\Section;
@@ -17,13 +16,16 @@ class RoutineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (!userHasPermission('routine-index')) {
             hasNotPermission();
         }
         $class = Classes::all();
-        return view('components.academic.routine', compact('class'));
+        $sections = Section::all();
+        $class_id = $request->class_id ?? '';
+        $section_id = $request->section_id ?? '';
+        return view('components.academic.routine', compact('class','class_id','section_id','sections'));
     }
 
     /**

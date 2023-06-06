@@ -35,6 +35,7 @@ class StudentController extends Controller
       ->get();
     if ($request->class_id) {
       $student = Student::where(['class_id' => $request->class_id, 'section_id' => $request->section_id, 'is_active' => 1, 'group_id' => $request->group_id])->orderBy('roll_number', 'asc')->get();
+      
       return view('components.student.index', compact('section', 'student', 'group'));
     }
     return view('components.student.index', compact('section', 'group'));
@@ -92,6 +93,7 @@ class StudentController extends Controller
     DB::beginTransaction();
     try {
       $data = $request->all();
+
       $unique_id = Student::orderBy('id', 'desc')->first();
       if ($unique_id) {
         // $data['student_unique_id'] = date('Y') . '000' . '1';
@@ -99,7 +101,6 @@ class StudentController extends Controller
       } else {
         $data['student_unique_id'] = date('Y') . '000' . '1';
       }
-
       if ($request->hasFile('photo')) {
         $file = $request->file('photo');
         $des = "images\students";
@@ -114,12 +115,11 @@ class StudentController extends Controller
         $data['parmanent_upozila'] = $request->upozila;
         $data['parmanent_district'] = $request->district;
       }
-
       // store password
       $student = new Student($data);
       // dd($student->toArray());
       $user = new User();
-      $user->username = $data['phone'];
+      $user->username = $data['student_unique_id'];
       $user->password = Hash::make('12345678');
       $user->branch_id = 1;
       $user->is_student = true;
@@ -248,7 +248,6 @@ class StudentController extends Controller
       return view('components.student.import', compact('section', 'info', 'group'));
     }
     return view('components.student.import', compact('section', 'group'));
-
   }
 
   public function download()
@@ -369,5 +368,4 @@ class StudentController extends Controller
     $data = Student::where('student_unique_id', $key)->with('class')->first();
     return response()->json($data);
   }
-
 }

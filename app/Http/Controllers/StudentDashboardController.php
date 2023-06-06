@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,8 @@ class StudentDashboardController extends Controller
 
   public function studentProfile()
   {
-    return view('students.profile');
+    $stu = User::join('students','students.user_id','users.id')->where('users.id',auth()->user()->id)->select('students.*')->first();
+    return view('students.profile.index',compact('stu'));
   }
 
   public function studentFees()
