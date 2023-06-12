@@ -34,6 +34,7 @@ use App\Http\Controllers\Fee\FeeInvoiceController;
 use App\Http\Controllers\Fee\FeeTypeController;
 use App\Http\Controllers\Frontend\OnlineapplyController;
 use App\Http\Controllers\GeneralSettingController;
+use App\Http\Controllers\HomeWorkController;
 use App\Http\Controllers\Hrm\DepartmentController;
 use App\Http\Controllers\Hrm\DesignationController;
 use App\Http\Controllers\Hrm\PayrollController;
@@ -71,8 +72,7 @@ Route::get('/transection', [OnlineapplyController::class, 'transection'])->name(
 Route::post('/transection', [OnlineapplyController::class, 'transectionPost']);
 
 Route::group(
-  ['as' => 'backend.', 'namespace' => 'Backend', 'prefix' => 'authority/student_dashboard', 'middleware' => ['auth', 'student']]
-  ,
+  ['as' => 'backend.', 'namespace' => 'Backend', 'prefix' => 'authority/student_dashboard', 'middleware' => ['auth', 'student']],
   function () {
     Route::get('/', [StudentDashboardController::class, 'studentDashboard'])->name('student.dashboard');
     Route::get('/profile', [StudentDashboardController::class, 'studentProfile'])->name('student.dashboard.profile');
@@ -177,7 +177,18 @@ Route::group(['as' => 'backend.', 'namespace' => 'Backend', 'prefix' => 'authori
     Route::post('/update', [RoutineController::class, 'update'])->name('update');
     Route::get('/delete/{id}', [RoutineController::class, 'destroy'])->name('delete');
 
-    Route::get('/getSection/{id}',[RoutineController::class,'getSection']);
+    Route::get('/getSection/{id}', [RoutineController::class, 'getSection']);
+  });
+
+  Route::group(['as' => 'home_work.', 'prefix' => 'home_work'], function () {
+    Route::get('/', [HomeWorkController::class, 'index'])->name('index');
+    Route::get('/create', [HomeWorkController::class, 'create'])->name('create');
+    Route::post('/store', [HomeWorkController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [HomeWorkController::class, 'edit'])->name('edit');
+    Route::post('/update/{id}', [HomeWorkController::class, 'update'])->name('update');
+    Route::get('/delete/{id}', [HomeWorkController::class, 'destroy'])->name('delete');
+
+    Route::get('/pdf/{filename}',[HomeWorkController::class ,'fileOpen'])->name('pdf.show');
   });
 
   // subject module
@@ -499,6 +510,13 @@ Route::group(['as' => 'backend.', 'namespace' => 'Backend', 'prefix' => 'authori
 
   Route::group(['as' => 'mark_sheet.', 'prefix' => 'examination/mark_sheet'], function () {
     Route::get('/', [ViewMarkcontroller::class, 'mark_sheet'])->name('index');
+  });
+  Route::group(['as' => 'seat_plan.', 'prefix' => 'examination/seat_plan'], function () {
+    Route::get('/', [ViewMarkcontroller::class, 'seat_plan'])->name('index');
+  });
+
+  Route::group(['prefix' => 'examination/id_card'], function () {
+    Route::get('/', [ViewMarkcontroller::class, 'id_card'])->name('id_card.index');
   });
 });
 

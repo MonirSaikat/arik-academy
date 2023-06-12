@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Teacher\Teacher;
 use App\Http\Controllers\Controller;
 use App\Models\UserHasRole;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,8 +21,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teacher = Teacher::orderBy('id','desc')->get();
-        return view('components.teacher.teacher',compact('teacher'));
+        $teacher = Teacher::orderBy('id', 'desc')->get();
+        return view('components.teacher.teacher', compact('teacher'));
     }
 
     /**
@@ -41,50 +43,53 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'name' => 'required',
-            'department_id' => 'required',
-            'salary' => 'required',
-            'phone' => 'required|unique:teachers',
-            'email' => 'required|email',
-            'address' => 'required',
-            'joining_date' => 'required'
-        ]);
-        $data = $request->all();
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $des = 'images/teacher/photo';
-            $name = 'photo.' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move($des,$name);
-            $data['photo'] = $name;
+        DB::beginTransaction();
+        try {
+            $request->validate([
+                'name' => 'required',
+                'department_id' => 'required',
+                'salary' => 'required',
+                'phone' => 'required|unique:teachers',
+                'email' => 'required|email',
+                'address' => 'required',
+                'joining_date' => 'required'
+            ]);
+            $data = $request->all();
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $des = 'images/teacher/photo';
+                $name = 'photo.' . time() . '.' . $file->getClientOriginalExtension();
+                $file->move($des, $name);
+                $data['photo'] = $name;
+            }
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $des = 'images/teacher/documents';
+                $name = 'document.' . time() . '.' . $file->getClientOriginalExtension();
+                $file->move($des, $name);
+                $data['file'] = $name;
+            }
+            if (!$request->branch_id) {
+                $data['branch_id'] = branchName();
+            }
+
+            $user =  User::create([
+                'username' => $request->phone,
+                'password' => Hash::make($request->phone),
+                'branch_id' => $data['branch_id'],
+            ]);
+            $data['user_id'] = $user->id;
+            Teacher::create($data);
+            UserHasRole::create([
+                'user_id' => $user->id,
+                'role_id' => 2,
+            ]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
         }
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $des = 'images/teacher/documents';
-            $name = 'document.' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move($des,$name);
-            $data['file'] = $name;
-        }
-        if (!$request->branch_id) {
-            $data['branch_id'] = branchName();
-        }
-        
-       $user =  User::create([
-            'username' => $request->phone,
-            'password' => Hash::make($request->phone),
-            'branch_id' => $data['branch_id'],
-            'is_teacher' => 1,
-        ]);
-        $data['user_id'] = $user->id;
-        Teacher::create($data);
-        UserHasRole::create([
-            'user_id' => $user->id,
-            'role_id' => 2,
-        ]);
-        // user create 
-        
-        return redirect()->route('backend.teacher.index')->with('success','Teacher Created Successfylly');
+        return redirect()->route('backend.teacher.index')->with('success', 'Teacher Created Successfylly');
     }
 
     /**
@@ -134,27 +139,27 @@ class TeacherController extends Controller
         $data['file'] = $teacher->file;
         if ($request->hasFile('photo')) {
             $des = 'images/teacher/photo';
-            if (File::Exists($des,$teacher->photo)) {
-                File::delete($des,$teacher->photo);
+            if (File::Exists($des, $teacher->photo)) {
+                File::delete($des, $teacher->photo);
             }
             $file = $request->file('photo');
             $name = 'photo.' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move($des,$name);
+            $file->move($des, $name);
             $data['photo'] = $name;
         }
         if ($request->hasFile('file')) {
             $des = 'images/teacher/documents';
-            if (File::Exists($des,$teacher->file)) {
-                File::delete($des,$teacher->file);
+            if (File::Exists($des, $teacher->file)) {
+                File::delete($des, $teacher->file);
             }
             $file = $request->file('file');
             $name = 'document.' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move($des,$name);
+            $file->move($des, $name);
             $data['file'] = $name;
         }
-        
+
         $teacher->update($data);
-        return redirect()->route('backend.teacher.index')->with('success','Teacher Updated Successfully');
+        return redirect()->route('backend.teacher.index')->with('success', 'Teacher Updated Successfully');
     }
 
     /**
@@ -169,6 +174,6 @@ class TeacherController extends Controller
 
         User::findOrFail($teacher->user_id)->delete();
         $teacher->delete();
-        return redirect()->route('backend.teacher.index')->with('success','Teacher Deleted Successfully');
+        return redirect()->route('backend.teacher.index')->with('success', 'Teacher Deleted Successfully');
     }
 }

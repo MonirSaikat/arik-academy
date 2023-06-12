@@ -160,14 +160,16 @@
           @csrf
           <div class="row">
             <input type="hidden" name="update_id" id="update_id">
+            @if (count($branch) > 1)
             <div class="col-md-6 mb-3">
-                <label for="branch_id">Branch</label>
-                <select name="branch_id" id="update_branch_id" class="form-control selectpicker" data-live-search="true" title="Select Branch Name">
-                  @foreach (App\Models\Branch::all() as $item)
-                      <option value="{{ $item->id }}">{{ $item->name }}</option>
-                  @endforeach
-                </select>
+              <label for="branch_id">Branch</label>
+              <select name="branch_id" id="update_branch_id" class="form-control selectpicker" data-live-search="true" title="Select Branch Name">
+                @foreach ($branch as $item)
+                <option value="{{ $item->id }}" {{ count($branch) == 1 ? 'selected':'' }}>{{ $item->name }}</option>
+                @endforeach
+              </select>
             </div>
+            @endif
             <div class="col-md-6 mb-3">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="update_name" class="form-control" placeholder="Enter Name" required>

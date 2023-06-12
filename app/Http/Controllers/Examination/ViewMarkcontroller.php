@@ -243,4 +243,24 @@ class ViewMarkcontroller extends Controller
         return view('components.examination.mark_sheet',compact('section','group'));
     }
 
+    function seat_plan(Request $request){
+        
+        if($request->class_id){
+            $class = $request->class_id;
+            $exam = Exam::findOrFail($request->exam_id);
+            $students = Student::where('class_id',$class)->get();
+            return view('components.examination.seat_plan_print',compact('class','exam','students'));
+        }
+        return view('components.examination.seat_plan');
+    }
+    function id_card(Request $request){
+        
+        if($request->class_id){
+            $class = $request->class_id;
+            $students = Student::where('class_id', $class)->get();
+            return view('components.examination.id_card_print',compact('class','students'));
+        }
+        return view('components.examination.id_card');
+    }
+
 }

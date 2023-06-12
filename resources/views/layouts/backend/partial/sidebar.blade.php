@@ -19,48 +19,48 @@
   </div>
 
   @if (userHasPermission('academic-module'))
-  <li class="nav-item">
-    <a class="nav-link {{ Request::is('academic*') ? '' : 'collapsed' }}" active href="#" data-toggle="collapse"
-      data-target="#academic-menu" aria-expanded="true" aria-controls="academic-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.academic') }}</span>
-    </a>
-    <div id="academic-menu" class="collapse {{ Request::is('authority/academic*') ? 'show' : '' }}"
-      aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        @if (userHasPermission('session-index'))
-          <a class="collapse-item {{ Request::is('authority/academic/session') ? 'active' : '' }}"
-            href="{{ route('backend.session.index') }}">{{ __('sidebar.create-session') }}</a>
-        @endif
+    <li class="nav-item">
+      <a class="nav-link {{ Request::is('academic*') ? '' : 'collapsed' }}" active href="#" data-toggle="collapse"
+        data-target="#academic-menu" aria-expanded="true" aria-controls="academic-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.academic') }}</span>
+      </a>
+      <div id="academic-menu" class="collapse {{ Request::is('authority/academic*') ? 'show' : '' }}"
+        aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          @if (userHasPermission('session-index'))
+            <a class="collapse-item {{ Request::is('authority/academic/session') ? 'active' : '' }}"
+              href="{{ route('backend.session.index') }}">{{ __('sidebar.create-session') }}</a>
+          @endif
 
-        @if (userHasPermission('section-index'))
-          <a class="collapse-item {{ Request::is('authority/academic/section') ? 'active' : '' }}"
-            href="{{ route('backend.section.index') }}">{{ __('sidebar.create-section') }}</a>
-        @endif
+          @if (userHasPermission('section-index'))
+            <a class="collapse-item {{ Request::is('authority/academic/section') ? 'active' : '' }}"
+              href="{{ route('backend.section.index') }}">{{ __('sidebar.create-section') }}</a>
+          @endif
 
-        @if (userHasPermission('group-index'))
-          <a class="collapse-item {{ Request::is('authority/academic/group') ? 'active' : '' }}"
-            href="{{ route('backend.group.index') }}">{{ __('sidebar.create-group') }}</a>
-        @endif
+          @if (userHasPermission('group-index'))
+            <a class="collapse-item {{ Request::is('authority/academic/group') ? 'active' : '' }}"
+              href="{{ route('backend.group.index') }}">{{ __('sidebar.create-group') }}</a>
+          @endif
 
-        @if (userHasPermission('class-index'))
-          <a class="collapse-item {{ Request::is('authority/academic/class') ? 'active' : '' }}"
-            href="{{ route('backend.class.index') }}">{{ __('sidebar.create-class') }}</a>
-        @endif
+          @if (userHasPermission('class-index'))
+            <a class="collapse-item {{ Request::is('authority/academic/class') ? 'active' : '' }}"
+              href="{{ route('backend.class.index') }}">{{ __('sidebar.create-class') }}</a>
+          @endif
 
-        @if (userHasPermission('room-index'))
-          <a class="collapse-item {{ Request::is('authority/academic/room') ? 'active' : '' }}"
-            href="{{ route('backend.room.index') }}">{{ __('sidebar.class-room') }}</a>
-        @endif
+          @if (userHasPermission('room-index'))
+            <a class="collapse-item {{ Request::is('authority/academic/room') ? 'active' : '' }}"
+              href="{{ route('backend.room.index') }}">{{ __('sidebar.class-room') }}</a>
+          @endif
 
-        @if (userHasPermission('routine-index'))
-          <a class="collapse-item {{ Request::is('authority/academic/routine') ? 'active' : '' }}"
-            href="{{ route('backend.routine.index') }}">{{ __('sidebar.create-routine') }}</a>
-        @endif
+          @if (userHasPermission('routine-index'))
+            <a class="collapse-item {{ Request::is('authority/academic/routine') ? 'active' : '' }}"
+              href="{{ route('backend.routine.index') }}">{{ __('sidebar.create-routine') }}</a>
+          @endif
 
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('subject-module'))
     <li class="nav-item">
@@ -171,19 +171,19 @@
   @endif
 
   @if (userHasPermission('homework-module'))
-  <li class="nav-item">
-    <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#homework-menu"
-      aria-expanded="true" aria-controls="homework-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.homework') }}</span>
-    </a>
-    <div id="homework-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item " href="">{{ __('sidebar.add-homework') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.homework-evaluation') }}</a>
+    <li class="nav-item">
+      <a class="nav-link {{ Request::is('authority/home_work*') ? '' : 'collapsed' }}" active href="#" data-toggle="collapse" data-target="#homework-menu"
+        aria-expanded="true" aria-controls="homework-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.homework') }}</span>
+      </a>
+      <div id="homework-menu" class="collapse {{ Request::is('authority/home_work*') ? 'show' : '' }}" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item {{ Request::is('authority/home_work/create') ? 'active' : '' }}" href="{{ route('backend.home_work.create') }}">{{ __('sidebar.add-homework') }}</a>
+          <a class="collapse-item {{ Request::is('authority/home_work') ? 'active' : '' }}" href="{{ route('backend.home_work.index') }}">{{ __('sidebar.homework-evaluation') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('examination-module'))
     <li class="nav-item">
@@ -202,6 +202,10 @@
               href="{{ route('backend.exam.index') }}">{{ __('sidebar.create-exam') }}</a>
             <a class="collapse-item {{ Request::is('authority/examination/exam-setup') ? 'active' : '' }}"
               href="{{ route('backend.exam_setup.index') }}">{{ __('sidebar.exam-setup') }}</a>
+            <a class="collapse-item {{ Request::is('authority/examination/seat_plan') ? 'active' : '' }}"
+              href="{{ route('backend.seat_plan.index') }}">{{ __('sidebar.seat-plan') }}</a>
+            <a class="collapse-item {{ Request::is('authority/examination/id_card') ? 'active' : '' }}"
+              href="{{ route('backend.id_card.index') }}">ID Card</a>
             <!--<a class="collapse-item " href="">{{ __('sidebar.admit-card') }}</a>-->
             <!--<a class="collapse-item " href="">{{ __('sidebar.setting') }}</a>-->
             <!--<a class="collapse-item " href="">{{ __('sidebar.seat-plan') }}</a>-->
@@ -227,222 +231,223 @@
   @endif
 
   @if (userHasPermission('fees-module'))
-  <li class="nav-item">
-    <a class="nav-link {{ Request::is('authority/fee*') ? '' : 'collapsed' }}" active href="#"
-      data-toggle="collapse" data-target="#fees-menu" aria-expanded="true" aria-controls="fees-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.fees') }}</span>
-    </a>
-    <div id="fees-menu" class="collapse {{ Request::is('authority/fee*') ? 'show' : '' }}"
-      aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item {{ Request::is('fee/group') ? 'active' : '' }}"
-          href="{{ route('backend.fee.group.index') }}">{{ __('sidebar.fees-group') }}</a>
-        <a class="collapse-item {{ Request::is('fee/type') ? 'active' : '' }}"
-          href="{{ route('backend.fee.type.index') }}">{{ __('sidebar.fees-type') }}</a>
-        <a class="collapse-item {{ Request::is('fee/allocation') ? 'active' : '' }}"
-          href="{{ route('backend.fee.allocation.index') }}">Fee Allocation</a>
-        <a class="collapse-item {{ Request::is('fee/invoice') ? 'active' : '' }}"
-          href="{{ route('backend.fee.invoice.index') }}">Fee Invoice</a>
-        <a class="collapse-item " href="">{{ __('sidebar.fees-waiver') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.fees-collection') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.payment-search') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.report') }}</a>
+    <li class="nav-item">
+      <a class="nav-link {{ Request::is('authority/fee*') ? '' : 'collapsed' }}" active href="#"
+        data-toggle="collapse" data-target="#fees-menu" aria-expanded="true" aria-controls="fees-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.fees') }}</span>
+      </a>
+      <div id="fees-menu" class="collapse {{ Request::is('authority/fee*') ? 'show' : '' }}"
+        aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item {{ Request::is('fee/group') ? 'active' : '' }}"
+            href="{{ route('backend.fee.group.index') }}">{{ __('sidebar.fees-group') }}</a>
+          <a class="collapse-item {{ Request::is('fee/type') ? 'active' : '' }}"
+            href="{{ route('backend.fee.type.index') }}">{{ __('sidebar.fees-type') }}</a>
+          <a class="collapse-item {{ Request::is('fee/allocation') ? 'active' : '' }}"
+            href="{{ route('backend.fee.allocation.index') }}">Fee Allocation</a>
+          <a class="collapse-item {{ Request::is('fee/invoice') ? 'active' : '' }}"
+            href="{{ route('backend.fee.invoice.index') }}">Fee Invoice</a>
+          <a class="collapse-item " href="">{{ __('sidebar.fees-waiver') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.fees-collection') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.payment-search') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.report') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('accounting-module'))
-  <li class="nav-item">
-    <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#accounting-menu"
-      aria-expanded="true" aria-controls="accounting-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.accounting') }}</span>
-    </a>
-    <div id="accounting-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item " href="">{{ __('sidebar.cashbook') }}</a>
-        <a class="collapse-item " href="{{ route('backend.bank.index') }}">{{ __('sidebar.bank') }}</a>
-        <a class="collapse-item " href="{{ route('backend.transcation.index') }}">{{ __('Bank Transcation') }}</a>
-        <a class="collapse-item "
-          href="{{ route('backend.expense_category.index') }}">{{ __('Expense Category') }}</a>
-        <a class="collapse-item " href="{{ route('backend.expense.index') }}">{{ __('sidebar.expense') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.report') }}</a>
+    <li class="nav-item">
+      <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#accounting-menu"
+        aria-expanded="true" aria-controls="accounting-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.accounting') }}</span>
+      </a>
+      <div id="accounting-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item " href="">{{ __('sidebar.cashbook') }}</a>
+          <a class="collapse-item " href="{{ route('backend.bank.index') }}">{{ __('sidebar.bank') }}</a>
+          <a class="collapse-item "
+            href="{{ route('backend.transcation.index') }}">{{ __('Bank Transcation') }}</a>
+          <a class="collapse-item "
+            href="{{ route('backend.expense_category.index') }}">{{ __('Expense Category') }}</a>
+          <a class="collapse-item " href="{{ route('backend.expense.index') }}">{{ __('sidebar.expense') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.report') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('income-module'))
-  <li class="nav-item">
-    <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#income-menu"
-      aria-expanded="true" aria-controls="income-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.income') }}</span>
-    </a>
-    <div id="income-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item " href="{{ route('backend.income.index') }}">{{ __('sidebar.income') }}</a>
-        <a class="collapse-item "
-          href="{{ route('backend.income_category.index') }}">{{ __('sidebar.income category') }}</a>
+    <li class="nav-item">
+      <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#income-menu"
+        aria-expanded="true" aria-controls="income-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.income') }}</span>
+      </a>
+      <div id="income-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item " href="{{ route('backend.income.index') }}">{{ __('sidebar.income') }}</a>
+          <a class="collapse-item "
+            href="{{ route('backend.income_category.index') }}">{{ __('sidebar.income category') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('inventory-module'))
-  <li class="nav-item">
-    <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#inventory-menu"
-      aria-expanded="true" aria-controls="inventory-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.inventory') }}</span>
-    </a>
-    <div id="inventory-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item " href="{{ route('backend.issue.index') }}">{{ __('sidebar.Issue/Return') }}</a>
-        <a class="collapse-item "
-          href="{{ route('backend.inventory_category.index') }}">{{ __('sidebar.Inventory Categories') }}</a>
-        <a class="collapse-item " href="{{ route('backend.supplier.index') }}">{{ __('sidebar.suppliers') }}</a>
-        <a class="collapse-item " href="{{ route('backend.store.index') }}">{{ __('sidebar.Stores') }}</a>
-        <a class="collapse-item " href="{{ route('backend.item.index') }}">{{ __('sidebar.Item Coding') }}</a>
-        <a class="collapse-item " href="{{ route('backend.purchase.index') }}">{{ __('sidebar.Purchase') }}</a>
-        <a class="collapse-item " href="{{ route('backend.stock.index') }}">{{ __('sidebar.Items Stock') }}</a>
+    <li class="nav-item">
+      <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#inventory-menu"
+        aria-expanded="true" aria-controls="inventory-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.inventory') }}</span>
+      </a>
+      <div id="inventory-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item " href="{{ route('backend.issue.index') }}">{{ __('sidebar.Issue/Return') }}</a>
+          <a class="collapse-item "
+            href="{{ route('backend.inventory_category.index') }}">{{ __('sidebar.Inventory Categories') }}</a>
+          <a class="collapse-item " href="{{ route('backend.supplier.index') }}">{{ __('sidebar.suppliers') }}</a>
+          <a class="collapse-item " href="{{ route('backend.store.index') }}">{{ __('sidebar.Stores') }}</a>
+          <a class="collapse-item " href="{{ route('backend.item.index') }}">{{ __('sidebar.Item Coding') }}</a>
+          <a class="collapse-item " href="{{ route('backend.purchase.index') }}">{{ __('sidebar.Purchase') }}</a>
+          <a class="collapse-item " href="{{ route('backend.stock.index') }}">{{ __('sidebar.Items Stock') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('hrm-module'))
-  <li class="nav-item">
-    <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#hrm-menu"
-      aria-expanded="true" aria-controls="hrm-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.hrm') }}</span>
-    </a>
-    <div id="hrm-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item "
-          href="{{ route('backend.designation.index') }}">{{ __('sidebar.designation') }}</a>
-        <a class="collapse-item "
-          href="{{ route('backend.department.index') }}">{{ __('sidebar.department') }}</a>
-        <a class="collapse-item " href="{{ route('backend.stuff.index') }}">{{ __('sidebar.stuff') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.stuff-attendance') }}</a>
-        <a class="collapse-item " href="{{ route('backend.payroll.index') }}">{{ __('sidebar.payroll') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.report') }}</a>
+    <li class="nav-item">
+      <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#hrm-menu"
+        aria-expanded="true" aria-controls="hrm-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.hrm') }}</span>
+      </a>
+      <div id="hrm-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item "
+            href="{{ route('backend.designation.index') }}">{{ __('sidebar.designation') }}</a>
+          <a class="collapse-item "
+            href="{{ route('backend.department.index') }}">{{ __('sidebar.department') }}</a>
+          <a class="collapse-item " href="{{ route('backend.stuff.index') }}">{{ __('sidebar.stuff') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.stuff-attendance') }}</a>
+          <a class="collapse-item " href="{{ route('backend.payroll.index') }}">{{ __('sidebar.payroll') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.report') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('sms-module'))
-  <li class="nav-item">
-    <a class="nav-link {{ Request::is('sms*') ? '' : 'collapsed' }}" active href="#" data-toggle="collapse"
-      data-target="#sms-menu" aria-expanded="true" aria-controls="sms-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.sms') }}</span>
-    </a>
-    <div id="sms-menu" class="collapse {{ Request::is('sms*') ? 'show' : '' }}" aria-labelledby="headingForm"
-      data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item " href="">{{ __('sidebar.result-sms') }}</a>
-        <a class="collapse-item {{ Request::is('sms') ? 'active' : '' }}"
-          href="{{ route('backend.sendsms.index') }}">{{ __('sidebar.bulk-sms') }}</a>
+    <li class="nav-item">
+      <a class="nav-link {{ Request::is('sms*') ? '' : 'collapsed' }}" active href="#" data-toggle="collapse"
+        data-target="#sms-menu" aria-expanded="true" aria-controls="sms-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.sms') }}</span>
+      </a>
+      <div id="sms-menu" class="collapse {{ Request::is('sms*') ? 'show' : '' }}" aria-labelledby="headingForm"
+        data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item " href="">{{ __('sidebar.result-sms') }}</a>
+          <a class="collapse-item {{ Request::is('sms') ? 'active' : '' }}"
+            href="{{ route('backend.sendsms.index') }}">{{ __('sidebar.bulk-sms') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('communication-module'))
-  <li class="nav-item">
-    <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#communication-menu"
-      aria-expanded="true" aria-controls="communication-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.communication') }}</span>
-    </a>
-    <div id="communication-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item " href="">{{ __('sidebar.notice-board') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.email') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.event') }}</a>
+    <li class="nav-item">
+      <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#communication-menu"
+        aria-expanded="true" aria-controls="communication-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.communication') }}</span>
+      </a>
+      <div id="communication-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item " href="">{{ __('sidebar.notice-board') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.email') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.event') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
   @if (userHasPermission('library-module'))
-  <li class="nav-item">
-    <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#library-menu"
-      aria-expanded="true" aria-controls="library-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.library') }}</span>
-    </a>
-    <div id="library-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item " href="">{{ __('sidebar.category') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.books') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.member') }}</a>
-        <a class="collapse-item " href="">{{ __('issue/return') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.all-issues') }}</a>
+    <li class="nav-item">
+      <a class="nav-link collapsed" active href="#" data-toggle="collapse" data-target="#library-menu"
+        aria-expanded="true" aria-controls="library-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.library') }}</span>
+      </a>
+      <div id="library-menu" class="collapse " aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item " href="">{{ __('sidebar.category') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.books') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.member') }}</a>
+          <a class="collapse-item " href="">{{ __('issue/return') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.all-issues') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
-  @if (auth()->user()->is_teacher != 1)
-  <li class="nav-item">
-    <a class="nav-link {{ Request::is('school*') ? '' : 'collapsed' }}" active href="#"
-      data-toggle="collapse" data-target="#library-menu1" aria-expanded="true" aria-controls="library-menu1">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('General Setting') }}</span>
-    </a>
-    <div id="library-menu1" class="collapse {{ Request::is('school*') ? 'show' : '' }}"
-      aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item {{ Request::is('school/principal/index') ? 'active' : '' }}"
-          href="{{ route('school.principal.index') }}">Message</a>
-        <a class="collapse-item {{ Request::is('school/history') ? 'active' : '' }} "
-          href="{{ route('school.history') }}">History</a>
-        <a class="collapse-item {{ Request::is('school/staff') ? 'active' : '' }}"
-          href="{{ route('school.staff') }}">Faculty</a>
-        <a class="collapse-item {{ Request::is('school/principal') ? 'active' : '' }}"
-          href="{{ route('school.principal') }}">Principle Information</a>
-        <a class="collapse-item {{ Request::is('school/gallery') ? 'active' : '' }}"
-          href="{{ route('school.gallery') }}">School Gallery</a>
-        <a class="collapse-item {{ Request::is('school/worker') ? 'active' : '' }}"
-          href="{{ route('school.worker') }}">School Staff</a>
-        <a class="collapse-item {{ Request::is('school/phone') ? 'active' : '' }}"
-          href="{{ route('school.phone') }}">School Information</a>
-        <a class="collapse-item {{ Request::is('school/logo') ? 'active' : '' }}"
-          href="{{ route('school.log') }}">School Logo</a>
-        <a class="collapse-item {{ Request::is('school/chairman/photo') ? 'active' : '' }}"
-          href="{{ route('school.chairman.photo') }}">Chairman</a>
-        <a class="collapse-item {{ Request::is('school/slider') ? 'active' : '' }}"
-          href="{{ route('school.slider') }}">Sliders</a>
-        <a class="collapse-item {{ Request::is('school/notice') ? 'active' : '' }}"
-          href="{{ route('school.notice') }}">Notice</a>
+  @if (auth()->user()->id == 1)
+    <li class="nav-item">
+      <a class="nav-link {{ Request::is('school*') ? '' : 'collapsed' }}" active href="#"
+        data-toggle="collapse" data-target="#library-menu1" aria-expanded="true" aria-controls="library-menu1">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('General Setting') }}</span>
+      </a>
+      <div id="library-menu1" class="collapse {{ Request::is('school*') ? 'show' : '' }}"
+        aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item {{ Request::is('school/principal/index') ? 'active' : '' }}"
+            href="{{ route('school.principal.index') }}">Message</a>
+          <a class="collapse-item {{ Request::is('school/history') ? 'active' : '' }} "
+            href="{{ route('school.history') }}">History</a>
+          <a class="collapse-item {{ Request::is('school/staff') ? 'active' : '' }}"
+            href="{{ route('school.staff') }}">Faculty</a>
+          <a class="collapse-item {{ Request::is('school/principal') ? 'active' : '' }}"
+            href="{{ route('school.principal') }}">Principle Information</a>
+          <a class="collapse-item {{ Request::is('school/gallery') ? 'active' : '' }}"
+            href="{{ route('school.gallery') }}">School Gallery</a>
+          <a class="collapse-item {{ Request::is('school/worker') ? 'active' : '' }}"
+            href="{{ route('school.worker') }}">School Staff</a>
+          <a class="collapse-item {{ Request::is('school/phone') ? 'active' : '' }}"
+            href="{{ route('school.phone') }}">School Information</a>
+          <a class="collapse-item {{ Request::is('school/logo') ? 'active' : '' }}"
+            href="{{ route('school.log') }}">School Logo</a>
+          <a class="collapse-item {{ Request::is('school/chairman/photo') ? 'active' : '' }}"
+            href="{{ route('school.chairman.photo') }}">Chairman</a>
+          <a class="collapse-item {{ Request::is('school/slider') ? 'active' : '' }}"
+            href="{{ route('school.slider') }}">Sliders</a>
+          <a class="collapse-item {{ Request::is('school/notice') ? 'active' : '' }}"
+            href="{{ route('school.notice') }}">Notice</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
 
-  @if (auth()->user()->is_teacher != 1)
-  <li class="nav-item">
-    <a class="nav-link {{ Request::is('setting*') ? '' : 'collapsed' }}" active href="#"
-      data-toggle="collapse" data-target="#setting-menu" aria-expanded="true" aria-controls="setting-menu">
-      <i class="fab fa-fw fa-wpforms"></i>
-      <span>{{ __('sidebar.setting') }}</span>
-    </a>
-    <div id="setting-menu" class="collapse {{ Request::is('setting*') ? 'show' : '' }}"
-      aria-labelledby="headingForm" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item {{ Request::is('setting/role/create') ? 'active' : '' }}"
-          href="{{ route('backend.role.create') }}">{{ __('sidebar.role-permission') }}</a>
-        <a class="collapse-item {{ Request::is('setting/brance') ? 'active' : '' }}"
-          href="{{ route('backend.branch.index') }}">{{ __('sidebar.branch') }}</a>
-        <a class="collapse-item "
-          href="{{ route('backend.setting.index') }}">{{ __('sidebar.general-setting') }}</a>
-        <a class="collapse-item {{ Request::is('setting/user_list') ? 'active' : '' }}"
-          href="{{ route('backend.user_list.index') }}">{{ __('sidebar.user-list') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.payment-method') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.sms-api') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.backup') }}</a>
-        <a class="collapse-item " href="">{{ __('sidebar.template-setting') }}</a>
+  @if (auth()->user()->id == 1)
+    <li class="nav-item">
+      <a class="nav-link {{ Request::is('setting*') ? '' : 'collapsed' }}" active href="#"
+        data-toggle="collapse" data-target="#setting-menu" aria-expanded="true" aria-controls="setting-menu">
+        <i class="fab fa-fw fa-wpforms"></i>
+        <span>{{ __('sidebar.setting') }}</span>
+      </a>
+      <div id="setting-menu" class="collapse {{ Request::is('setting*') ? 'show' : '' }}"
+        aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item {{ Request::is('setting/role/create') ? 'active' : '' }}"
+            href="{{ route('backend.role.create') }}">{{ __('sidebar.role-permission') }}</a>
+          <a class="collapse-item {{ Request::is('setting/brance') ? 'active' : '' }}"
+            href="{{ route('backend.branch.index') }}">{{ __('sidebar.branch') }}</a>
+          <a class="collapse-item "
+            href="{{ route('backend.setting.index') }}">{{ __('sidebar.general-setting') }}</a>
+          <a class="collapse-item {{ Request::is('setting/user_list') ? 'active' : '' }}"
+            href="{{ route('backend.user_list.index') }}">{{ __('sidebar.user-list') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.payment-method') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.sms-api') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.backup') }}</a>
+          <a class="collapse-item " href="">{{ __('sidebar.template-setting') }}</a>
+        </div>
       </div>
-    </div>
-  </li>
+    </li>
   @endif
 
 

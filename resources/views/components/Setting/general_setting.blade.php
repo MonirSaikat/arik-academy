@@ -19,27 +19,27 @@
             <div class="col-lg-12">
                 <div class="mb-3">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ $general_setting->name }}">
+                    <input type="text" name="name" id="name" class="form-control" value="{{ $general_setting->name ?? ''}}">
                 </div>
                 <div class="mb-3">
                     <label for="eiin_no">EIIN No</label>
-                    <input type="text" name="eiin_no" id="eiin_no" class="form-control" value="{{ $general_setting->eiin_no }}">
+                    <input type="text" name="eiin_no" id="eiin_no" class="form-control" value="{{ $general_setting->eiin_no ?? ''}}">
                 </div>
                 <div class="mb-3">
                     <label for="code">Code</label>
-                    <input type="text" name="code" id="code" class="form-control" value="{{ $general_setting->code }}">
+                    <input type="text" name="code" id="code" class="form-control" value="{{ $general_setting->code ?? ''}}">
                 </div>
                 <div class="mb-3">
                     <label for="address">Address</label>
-                    <input type="text" name="address" id="address" class="form-control" value="{{ $general_setting->address }}">
+                    <input type="text" name="address" id="address" class="form-control" value="{{ $general_setting->address ?? '' }}">
                 </div>
                 <div class="mb-3">
                     <label for="phone">Phone</label>
-                    <input type="text" name="phone" id="phone" class="form-control" value="{{ $general_setting->phone }}">
+                    <input type="text" name="phone" id="phone" class="form-control" value="{{ $general_setting->phone ?? ''}}">
                 </div>
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input type="text" name="email" id="email" class="form-control" value="{{ $general_setting->email }}">
+                    <input type="text" name="email" id="email" class="form-control" value="{{ $general_setting->email ?? ''}}">
                 </div>
                 <div class="mb-3">
                     <label for="logo">Logo</label>

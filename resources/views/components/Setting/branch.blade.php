@@ -49,12 +49,10 @@
                           </a>
                         
                           <div class="dropdown-menu">
-                            @if (userHasPermission('accountreport-advance'))
                             <a class="dropdown-item" href="{{ route('backend.branch.deactive',$item->id) }}">{{ $item->is_active == 1 ? 'Deactive':'Active' }}</a>
-                            @endif
-                            @if (userHasPermission('accountreport-update'))
+                            
                             <a class="dropdown-item" href="javascript:void(0)" onclick="editbutton({{ $item->id }})"><i class="fas fa-edit mr-2"></i> Edit</a>
-                            @endif
+                            
                           </div>
                         </div>
                       </td>
@@ -94,8 +92,8 @@
                 <input type="text" name="address" class="form-control" id="address" required>
             </div>
             <div class="form-group">
-                <label for="image">Address</label>
-                <input type="file" name="image" class="form-control" id="image" required>
+                <label for="image">Logo</label>
+                <input type="file" name="image" class="form-control" id="image">
             </div>
             
             <button type="submit" class="btn btn-success mt-2">Save</button>
@@ -131,8 +129,8 @@
                 <input type="text" name="address" class="form-control" id="update_address" required>
             </div>
             <div class="form-group">
-                <label for="image">Address</label>
-                <input type="file" name="image" class="form-control" id="image" required>
+                <label for="image">Logo</label>
+                <input type="file" name="image" class="form-control" id="image">
             </div>
           <button class="btn btn-success mt-2" type="submit">Update</button>
         </form>

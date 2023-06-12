@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GroupSeeder::class);
         $this->call(SectionSeeder::class);
         $this->call(SessionSeeder::class);
+        $this->call(GeneralSettingSeeder::class);
 
         \DB::table('fee_schedules')->insert([
             ['name' => 'Registration Fee', 'time' => 1],
