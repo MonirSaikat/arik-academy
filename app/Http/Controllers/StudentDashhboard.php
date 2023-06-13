@@ -36,4 +36,7 @@ class StudentDashhboard extends Controller
 
         return back()->with('success', 'Password updated');
     }
+    function homework() {
+        return view('students.homework.index');
+    }
 }

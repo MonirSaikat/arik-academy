@@ -13,6 +13,9 @@ Route::group([
     Route::get('/profile', [StudentDashhboard::class, 'profile'])->name('dashboard.profile'); 
     Route::get('/fees', [StudentDashhboard::class, 'fee_list'])->name('dashboard.fee_list'); 
     Route::put('/update_password', [StudentDashhboard::class, 'update_password'])->name('update_password');
+
+    Route::get('/homework', [StudentDashhboard::class, 'homework'])->name('homework'); 
+    Route::post('/homework', [StudentDashhboard::class, 'homework'])->name('homework'); 
     
 });
 

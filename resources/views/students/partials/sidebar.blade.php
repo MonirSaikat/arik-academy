@@ -30,6 +30,13 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {{ Request::is('student/homework*') ? '' : 'collapsed' }}" active
+            href="{{ route('students.homework') }}">
+            <i class="fab fa-fw fa-wpforms"></i>
+            <span>{{ __('sidebar.homework') }}</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{ Request::is('setting*') ? '' : 'collapsed' }}" active href="{{ route('logout') }}">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
